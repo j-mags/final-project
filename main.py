@@ -4,33 +4,36 @@ def gameplay():
 	print("---WELCOME---\n")
 	print("\tAmidst bubbling potions and enchanting spells, a mystery occurs at your school;\n\tit's your duty to solve the puzzles and recover what has gone missing.")
 	run.py()
+	start = True
 rooms = {"Library", "Hallway", "Classroom", "Greenhouse"}
 location = ""
-try:
-	while location == rooms[0]:
-		print(f{room_descriptions[0]})
-		print("A girl runs up to you, startling you so hard that you almost drop your book.\n")
-		qna = int(input('''"Hey, you're the student council president, right?"\n\t> Yeah, what's up? (1)\n\t> Why are you asking if you already know… (2)\n'''))
-		friendship = 0
-		try:
-		qna = int(qna)
-			if qna != 1 or qna != 2:
-				print("Sorry, that wasn’t a valid option.\n")
-		except:
-			if qna == 1:
-				print('''\t> "Perfect! The head librarian has a bit of a... problem we need to fix."''')
-		else:
-			if qna == 2:
-				print('''She frowns. "Just formalities, I guess."\n "The head librarian has a problem, and she said I needed to find you." (-1 Friendship Points)\n''')
-			friendship -= 1
-		print("Friendship Meter: [{"*"*{friendship}}]")
-		print('''"Apparently, one of the books from the forbidden section of the library has gone missing."\n"Not sure why we have a 'forbidden' section here to begin with."''')
-		if friendship < 0:
-			print('''She sighs. "I guess we'll have to find it together."''')
-		else:
-			print('''"Looks like we'll be partners in crime today!"\n''')
-		print("Your colored pencil (weird that you only have one) is sitting on a desk.")
-		game.input()
+while start == True:
+	try:
+		location = rooms[0]
+		while location == rooms[0]:
+			print(f{room_descriptions[0]})
+			print("A girl runs up to you, startling you so hard that you almost drop your book.\n")
+			qna = int(input('''"Hey, you're the student council president, right?"\n\t> Yeah, what's up? (1)\n\t> Why are you asking if you already know… (2)\n'''))
+			friendship = 0
+			try:
+			qna = int(qna)
+				if qna != 1 or qna != 2:
+					print("Sorry, that wasn’t a valid option.\n")
+			except:
+				if qna == 1:
+					print('''\t> "Perfect! The head librarian has a bit of a... problem we need to fix."''')
+			else:
+				if qna == 2:
+					print('''She frowns. "Just formalities, I guess."\n "The head librarian has a problem, and she said I needed to find you." (-1 Friendship Points)\n''')
+				friendship -= 1
+			print("Friendship Meter: [{"*"*{friendship}}]")
+			print('''"Apparently, one of the books from the forbidden section of the library has gone missing."\n"Not sure why we have a 'forbidden' section here to begin with."''')
+			if friendship < 0:
+				print('''She sighs. "I guess we'll have to find it together."''')
+			else:
+				print('''"Looks like we'll be partners in crime today!"\n''')
+			print("Your colored pencil (weird that you only have one) is sitting on a desk.")
+			game.input()
 
 
 
