@@ -1,7 +1,5 @@
-#agh. figure out uhhhhh... like using objects 
-#put items in each room
-import Rooms
 def gameplay():
+	#fix friendship levels lol
 	rooms = {"library", "hallway", "greenhouse"}
 	location = ""
 	location == "library"
@@ -29,30 +27,46 @@ def gameplay():
 	examine()
 	if "colored pencil" in inventory:
 		print('''[Haruna]: "Hey, I actually have this color-by-number from the librarian!"\n''')
-		qna = input("\n\t> I only have one color, Einstein. It's gonna turn out bad. (1)\n\t> YAYYYYY! (2)\n")
+		qna = int(input("\n\t> I only have one color, Einstein. It's gonna turn out bad. (1)\n\t> YAYYYYY! (2)\n"))
 		if qna == 1:
-			print('''[Haruna]: "You're such a downer. *sigh* Just try it."\n''')
+			print('''[Haruna]: "You're such a downer. *sigh* Just try and use the colored pencil."\n''')
 			friendship -= 1
 			friendship = int(friendship)
 			enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
+			choice()
 		elif qna == 2:
-			print('''[Haruna]: "YAYYYYY!"\n''')
+			print('''[Haruna]: "YAYYYYY!"''')
+			print('''[Haruna]: "Let's use the colored pencil!"\n''')
 			friendship += 1
 			friendship = int(friendship)
 			enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
+			choice()
+			print(f"\n\t> Pretty sure it's a Asteraceae Viper.\nShe stares blankly again.\n")
+			qna = int(input("\t> I pay attention in Botany! Maybe you should too. (1)\n\t> Scary plant go chomp chomp. (2)\n"))
+			if qna == 1:
+				print(f'''[Haruna]: "I *do* pay attention. It's that one carnivorous plant... I was just testing you..."\nHaruna looks sulky.''')
+				friendship -= 1
+				friendship = int(friendship)
+				enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
+			else:
+				print('''Haruna laughs.\n[Haruna]: "Using scientific terms, I see."''')
+				friendship += 1
+				friendship = int(friendship)
+				enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
 		print("You do the color-by-number completely in green.")
 		new_item = "picture"
 		inventory.append(new_item)
-		enter = input("\n\tNew item [picture] has been added to inventory.")
+		enter = input("\n\tNew item [picture] has been added to inventory.\n")
 		print('''[Haruna]: "Alright. Seems like we're done in here."\n''')
-		print("You and Haruna walk into the hallway.\n")
-		SorL = input("Would you like to save (s) or load (l) a game?\n").lower
+		print("You and Haruna walk into the hallway.\n------\n")
+		SorL = input("Would you like to save (s) or load (l) a game?\nOr, would you like to continue (c)?").lower
 		if SorL == "s":
 			save()
 		elif SorL == "l":
 			load()
-		location = "hallway"
-		print(f"{room_descriptions[0]}")
+		else:
+			location = "hallway"
+			print(f"{room_descriptions[0]}")
 
 def examine():
 	look = input("\nWould you like to examine the room?\n\t> Yes\n\t> No\n")
@@ -81,29 +95,14 @@ def quit():
 		print("---------------------------------------")
 		exit()
 def use():
-	use_item = input("What item would you like to use?\n")
 	print(f"Inventory: {inventory}")
+	use_item = input("What item would you like to use?\n")
 	if use_item in inventory:
 		while use_item == "colored pencil":
-			if location == "library":
-				usable = True
-				enter = input(f'''[Haruna]: "Oh! It worked!"''')
-				enter = input(f'''[Haruna]: "That's a sick drawing of a..."\nShe stares.\n"{name}, what exactly is that..."''')
-				print(f"\n\t> Pretty sure it's a Asteraceae Viper.\nShe stares blankly again.")
-				qna = input("\t> I pay attention in Botany! Maybe you should too. (1)\n\t> Scary plant go chomp chomp. (2)")
-				if qna == 1:
-					print(f'''[Haruna]: "I *do* pay attention. It's that one carnivorous plant... I was just testing you..."\nHaruna looks sulky.''')
-					friendship -= 1
-					friendship = int(friendship)
-					enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
-				else:
-					print('''Haruna laughs.\n[Haruna]: "Using scientific terms, I see."''')
-					friendship += 1
-					friendship = int(friendship)
-					enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
-			else:
-				usable = False 
-				print('''There's a smile on Haruna's face.\n[Haruna]: "What exactly are you trying to do...?"\n[Haruna]: "Let's try something different."''')
+			enter = input(f'''[Haruna]: "Oh! It worked!"''')
+			enter = input(f'''[Haruna]: "That's a sick drawing of a..."\nShe stares.\n[Haruna]:"What exactly is that..."''')
+	else:
+		print('''There's a smile on Haruna's face.\n[Haruna]: "What exactly are you trying to do...?"\n[Haruna]: "Let's try something different."''')
 
 def choice():
 	actions = ("q", "s", "l", "g", "u")
