@@ -41,43 +41,75 @@ def gameplay():
 			friendship = int(friendship)
 			enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
 			choice()
-			print(f"\n\t> Pretty sure it's a Asteraceae Viper.\nShe stares blankly again.\n")
-			qna = int(input("\t> I pay attention in Botany! Maybe you should too. (1)\n\t> Scary plant go chomp chomp. (2)\n"))
-			if qna == 1:
-				print(f'''[Haruna]: "I *do* pay attention. It's that one carnivorous plant... I was just testing you..."\nHaruna looks sulky.''')
-				friendship -= 1
-				friendship = int(friendship)
-				enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
-			else:
-				print('''Haruna laughs.\n[Haruna]: "Using scientific terms, I see."''')
-				friendship += 1
-				friendship = int(friendship)
-				enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.")
 		print("You do the color-by-number completely in green.")
 		new_item = "picture"
 		inventory.append(new_item)
 		enter = input("\n\tNew item [picture] has been added to inventory.\n")
 		print('''[Haruna]: "Alright. Seems like we're done in here."\n''')
 		print("You and Haruna walk into the hallway.\n------\n")
-		SorL = input("Would you like to save (s) or load (l) a game?\nOr, would you like to continue (c)?").lower
+		SorL = input("Would you like to save (s) or load (l) a game?\nOr, would you like to continue (c)?\n").lower
 		if SorL == "s":
 			save()
 		elif SorL == "l":
 			load()
 		else:
 			location = "hallway"
-			print(f"{room_descriptions[0]}")
+			print(f"------\n\n{room_descriptions[1]}\n")
+			option = int(input("Would you like to politely ask people to move (1) or brute force your way through (2)?\n"))
+			if option == 2:
+				print(f"Masul Academy of Sorcery has not seen someone as determined as you, {name}.\nHats off to you.")
+				print("\n\tYou bump into a student with shifting eyes and fidgeting fingers.")
+				print('''[Haruna]: "Hey, watch it-!"\n''')
+				print("It seems they dropped something.")
+				inventory.append(key)
+				examine()
+			elif option == 1:
+				print("\t> E-excuse me! Can I get through...?\n")
+				print("Students in the hall give you the stink eye.")
+				print('''[Haruna]: "Yikes. Not a power move."\n''')
+				print("\tDespite that, she laughs.\n")
+				friendship += 1
+				friendship = int(friendship)
+				enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.\n")
+				print('''[Haruna]: "Still, we need a way to get through this."\n''')
+				qna = input("Alright, do you have it in you to push through the crowd? (y) (n)\n")
+				if qna == "y":
+					print("There's the fighting spirit!")
+					print(f"Masul Academy of Sorcery has not seen someone as determined as you, {name}.\nHats off to you.")
+					print("\n\tYou bump into a student with shifting eyes and fidgeting fingers.")
+					print('''[Haruna]: "Hey, watch it-!"\n''')
+					print("It seems they dropped something.")
+					inventory.append("key")
+					examine()
+				elif qna == "n":
+					print("\nI... why not? You could use magic to blow them away for all we care.")
+					print('''Haruna sighs.\n\n[Haruna]: "Look, I'll just push thr-"\n\tA student with shifting eyes and fidgeting fingers bumps into you.\n\tSeems they dropped something.''')
+					inventory.append("key")
+					examine()
+	elif "colored pencil" not in inventory:
+		print('''[Haruna]: "That colored pencil looks miiiighty interesting..."''')
+		choice()
 
 def examine():
 	look = input("\nWould you like to examine the room?\n\t> Yes\n\t> No\n")
-	if look in ("Y","Yes","y","yes"):
-		print("Your colored pencil (weird that you only have one) is sitting on a desk.")
-		choice()
-	else:
-		yikes = input("Okay... um.")
-		yikes = input("Nice weather we're having here.")
-		yikes = input("Alright let's get back to the game.")
-		examine()
+	while "colored pencil" not in inventory:
+		if look in ("Y","Yes","y","yes"):
+			print("Your colored pencil (weird that you only have one) is sitting on a desk.")
+			choice()
+		else:
+			yikes = input("Okay... um.")
+			yikes = input("Nice weather we're having here.")
+			yikes = input("Alright let's get back to the game.")
+			examine()
+	if "colored pencil" in inventory and "key" in inventory:
+		if look in ("Y","Yes","y","yes"):
+			print("The comically suspicious student dropped a key in your brief encounter.")
+			choice()
+		else:
+			yikes = input("Okay... um.")
+			yikes = input("Nice weather we're having here.")
+			yikes = input("Alright let's get back to the game.")
+			examine()
 def save(self):
 	with shelve.open("game.bin") as s:
 		s.close()
@@ -99,11 +131,21 @@ def use():
 	use_item = input("What item would you like to use?\n")
 	if use_item in inventory:
 		while use_item == "colored pencil":
-			enter = input(f'''[Haruna]: "Oh! It worked!"''')
+			enter = input(f'''\n[Haruna]: "Oh! It worked!"''')
 			enter = input(f'''[Haruna]: "That's a sick drawing of a..."\nShe stares.\n[Haruna]:"What exactly is that..."''')
+			print(f"\n\t> Pretty sure it's a Asteraceae Viper.\nShe stares blankly again.\n")
+			qna = int(input("\t> I pay attention in Botany! Maybe you should too. (1)\n\t> Scary plant go chomp chomp. (2)\n"))
+			if qna == 1:
+				print(f'''[Haruna]: "I *do* pay attention. It's that one carnivorous plant... I was just testing you..."\nHaruna looks sulky.''')
+				enter = input(f"Press enter to continue.\n")
+			else:
+				print('''Haruna laughs.\n[Haruna]: "Using scientific terms, I see."\n[Haruna]: "Hey, maybe this could be a clue!"''')
+				print("\nYou wonder why the librarian would even give you a clue if\nshe's the one who's looking for the missing book.")
+				enter = input(f"\nPress enter to continue.\n")
+			text = "You do the color-by-number completely in green."
+			return text
 	else:
 		print('''There's a smile on Haruna's face.\n[Haruna]: "What exactly are you trying to do...?"\n[Haruna]: "Let's try something different."''')
-
 def choice():
 	actions = ("q", "s", "l", "g", "u")
 	reponse = ""
@@ -121,6 +163,8 @@ def choice():
 			print(f"You pick up the {grab}. That'll come in handy.\n")
 			inventory.append(grab)
 			room_items.remove(grab)
+		else:
+			print("That's not an item that can be added to your inventory!")
 	elif response == "u":
 		use()
 	elif response == "i":
