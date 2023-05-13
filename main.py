@@ -1,5 +1,4 @@
 def gameplay():
-	#fix friendship levels lol
 	rooms = {"library", "hallway", "greenhouse"}
 	location = ""
 	location == "library"
@@ -57,11 +56,11 @@ def gameplay():
 			print(f"------\n\n{room_descriptions[1]}\n")
 			option = int(input("Would you like to politely ask people to move (1) or brute force your way through (2)?\n"))
 			if option == 2:
-				print(f"Masul Academy of Sorcery has not seen someone as determined as you, {name}.\nHats off to you.")
+				print(f"\nMasul Academy of Sorcery has not seen someone as determined as you, {name}.\nHats off to you.")
 				print("\n\tYou bump into a student with shifting eyes and fidgeting fingers.")
 				print('''[Haruna]: "Hey, watch it-!"\n''')
 				print("It seems they dropped something.")
-				inventory.append(key)
+				inventory.append("key")
 				examine()
 			elif option == 1:
 				print("\t> E-excuse me! Can I get through...?\n")
@@ -86,6 +85,50 @@ def gameplay():
 					print('''Haruna sighs.\n\n[Haruna]: "Look, I'll just push thr-"\n\tA student with shifting eyes and fidgeting fingers bumps into you.\n\tSeems they dropped something.''')
 					inventory.append("key")
 					examine()
+			if "key" in inventory:
+				enter = input("\n\tNew item [key] has been added to inventory.\n")
+				print('''[Haruna]: "Alright. Seems like we're done in here."\n''')
+				enter = input("But you're a little stumped on where to go next.\n")
+				print(f'''[Haruna]: "{name}! Check this out! The key has something engraved in it."\n''')
+				enter= input("\nThe key says:\n\t'GR  NH  S'\nYou're puzzled.\n")
+				print('''[Haruna]: "Okay... Grnhs.. that means nothing to me."\nShe pauses.\n[Haruna]: "Maybe- maybe this has something to do with the drawing! The plant!"''')
+				puzzle = input('''[Haruna]: "What do you think the key is for?"\n''')
+				if puzzle in ("greenhouse","green","Greenhouse","Green"):
+					print('''She claps.\n[Haruna]: "You're a genius! To the greenhouse we go!"\n''')
+				else:
+					print('''[Haruna]: "Gruuunn...hoos... that's not right..."\n[Haruna]: "Grenhas..? That feels closer.."\n''')
+					puzzle = input('''[Haruna]: "What do you think the key is for?"\n''').lower
+					if puzzle in ("greenhouse","green","Greenhouse","Green"):
+						print('''She claps.\n[Haruna]: "You're a genius! To the greenhouse we go!"\n''')
+					else:
+						print('''[Haruna]: "Okay, honestly, I figured it out. It's greenhouse."\n''')
+						print("It's okay to be a bit embarrassed.\nLet's continue.\n")
+				print("You and Haruna head to the greenhouse.\n------\n")
+				SorL = input("Would you like to save (s) or load (l) a game?\nOr, would you like to continue (c)?\n").lower
+				if SorL == "s":
+					save()
+				elif SorL == "l":
+					load()
+				else:
+					print("------\nThe greenhouse looms ahead of you.\n")
+					enter = input('''[Haruna]: "This feels like the final boss..."\nHaruna is great at foreshadowing."\n''')
+					print("\t> I'm gonna use the key...")
+					choice()
+					qna = int(input("Will you go in first (1) or let Haruna tough it out and make her go first (2)?\n"))
+					if qna == 1:
+						print("\t> Okay, follow me.\n")
+						print(f'''Her eyes light up.\n[Haruna]: "You know what, {name}, you're pretty cool!"\nA single tear rolls down her face (not really).\n''')
+						friendship += 3
+						friendship = int(friendship)
+						enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.\n")
+					elif qna == 2:
+						print("\t> Sucks to suck.\nYou make her walk in first.")
+						enter = input("I feel like you really tanked any chance of friendship here.\n")
+						friendship -= 3
+						friendship = int(friendship)
+						enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.\n")
+					location = "greenhouse"
+					print(f"------You enter.\n\n{room_descriptions[2]}\n")
 	elif "colored pencil" not in inventory:
 		print('''[Haruna]: "That colored pencil looks miiiighty interesting..."''')
 		choice()
@@ -144,6 +187,10 @@ def use():
 				enter = input(f"\nPress enter to continue.\n")
 			text = "You do the color-by-number completely in green."
 			return text
+		while use_item == "key":
+			print("\nThe lock clicks.\n")
+			text = '''[Haruna]: "This is stupid but I'm kind of scared."'''
+			return text
 	else:
 		print('''There's a smile on Haruna's face.\n[Haruna]: "What exactly are you trying to do...?"\n[Haruna]: "Let's try something different."''')
 def choice():
@@ -174,11 +221,7 @@ def choice():
 		choice()
 
 room_descriptions = ["The library is expansive, with the smell of cinnamon and the fluttering of pages in the air.", 
-"It's bustling in the hallway. You can't help but bump into passerbys.", 
-"The decor in the potion-brewing classroom is eclectic.\nThere is a permanent glow of dust in the air from the amount of failed potions by students.",
+"It's bustling in the hallway. You can't help but bump into passerbys.",
 "Navigating through lush greenery, you spot the plant you've been searching for."]
 inventory = []
 room_items = {"colored pencil", "key", "soda", "code"}
-#loop for movement
-#add objects
-#make inventory
