@@ -2,6 +2,7 @@ def gameplay():
 	rooms = {"library", "hallway", "greenhouse"}
 	location = ""
 	location == "library"
+	end = False
 	print(f"{room_descriptions[0]}")
 	print("A girl runs up to you, startling you so hard that you almost drop your book.\n")
 	print('''[?]: "Hey, you!"''')
@@ -128,7 +129,80 @@ def gameplay():
 						friendship = int(friendship)
 						enter = input(f"Friendship Level: [{friendship}]\n\tPress enter to continue.\n")
 					location = "greenhouse"
-					print(f"------You enter.\n\n{room_descriptions[2]}\n")
+					print(f"------\nYou enter.\n\n{room_descriptions[2]}\n")
+					print('''[Haruna]: *gasp* "There's the astricase wiper!"\n''')
+					enter = input("\t> Asteraceae viper.\n")
+					print('''[Haruna]: "We are on the cusp of solving a mystery and maybe fighting a magical carnivorous plant. \nAre specifics important?"''')
+					print("She makes a good point.\n")
+					enter = input('''[Haruna]: "Not gonna lie right now. I am way too scared. Here- take my wand."\n''')
+					print("\t------ MINI GAME ------\nDefeat the evil plant!\nWhat spell will you use?\n")
+					option = int(input("\tSodaeous Cascata - this just sprays Coca-Cola. (1)\n\tLvl. 100 Full Force Impacteous - makes your opponent feel like they've been lightly slapped (2)\n\tTuno Autus - makes all your words sound autotuned (3)\n"))
+					if option == 1:
+						print("You use [Sodaeous Cascata]! It's highly effective! The plant opens its mouth to drink the soda!\n\t----------------------\n\nGood news- this makes the asteraceae viper throw up what it was hiding!\n")
+						enter = input('''[Haruna]: "Wow! Yuck!" She says with a smile on her face.\nHaruna picks up what the plant regurgitated.\n''')
+						enter = input(f'''[Haruna]: "No way...! {name}!!!"\nShe holds up... the missing book!''')
+						if friendship > 3:
+							print("\nYou two high five.\n")
+						else:
+							enter = input("\nShe almost holds up her hand to high five you, but she drops her arm.\n")
+						print('''Dont forget, there's bad news-\n[Haruna]: "Oh..."\n[Haruna]: "It... the plant isn't dead right?"''')
+						print("You look at the plant. It is definitely dead.")
+						end = True
+					elif option == 2:
+						print("You use [Lvl. 100 Full Force Impacteous]!\nThe plant stares angrily and only looks more offended when you cast the spell and it is slightly hit.\n")
+						print('''[Haruna]: "Ohhh... wow, that was lame. Maybe try the cola spell."''')
+						option = int(input("\tSodaeous Cascata - this just sprays Coca-Cola. (1)\n\tLvl. 100 Full Force Impacteous - makes your opponent feel like they've been lightly slapped (2)\n\tTuno Autus - makes all your words sound autotuned (3)\n"))
+						if option == 1:
+							print("You use [Sodaeous Cascata]! It's highly effective! The plant opens its mouth to drink the soda!\n\t----------------------\n\nGood news- this makes the asteraceae viper throw up what it was hiding!\n")
+							enter = input('''[Haruna]: "Wow! Yuck!" She says with a smile on her face.\nHaruna picks up what the plant regurgitated.\n''')
+							print(f'''[Haruna]: "No way...! {name}!!!"\nShe holds up... the missing book!''')
+							if friendship > 3:
+								print("\nYou two high five.\n")
+							else:
+								print("\nShe almost holds up her hand to high five you, but she drops her arm.\n")
+							print('''Dont forget, there's bad news-\n[Haruna]: "Oh..."\n[Haruna]: "It... the plant isn't dead right?"''')
+							print("You look at the plant. It is definitely dead.")
+							end = True
+					elif option == 3:
+						print("You use [Tuno Autus]!\n\t> Take this, beast!\nYou announce with an unnatural vibrato. The plant looks unimpressed, somehow.\n")
+						print('''[Haruna]: "You've got some pipes! But it seems like that only disappointed the plant. Maybe try the cola spell."\n''')
+						option = int(input("\tSodaeous Cascata - this just sprays Coca-Cola. (1)\n\tLvl. 100 Full Force Impacteous - makes your opponent feel like they've been lightly slapped (2)\n\tTuno Autus - makes all your words sound autotuned (3)\n"))
+						if option == 1:
+							print("You use [Sodaeous Cascata]! It's highly effective! The plant opens its mouth to drink the soda!\n\t----------------------\n\nGood news- this makes the asteraceae viper throw up what it was hiding!\n")
+							enter = input('''[Haruna]: "Wow! Yuck!" She says with a smile on her face.\nHaruna picks up what the plant regurgitated.\n''')
+							print(f'''[Haruna]: "No way...! {name}!!!"\nShe holds up... the missing book!''')
+							if friendship > 3:
+								print("\nYou two high five.\n")
+							else:
+								print("\nShe almost holds up her hand to high five you, but she drops her arm.\n")
+							print('''Dont forget, there's bad news-\n[Haruna]: "Oh..."\n[Haruna]: "It... the plant isn't dead right?"''')
+							print("You look at the plant. It is definitely dead.")
+							end = True
+	if end == True:
+		print("\n------\n")
+		enter = input("You and Haruna return the book to the head librarian, recalling all the fascinating details.")
+		print("\n\t> And then we killed the asteraceae viper-\n")
+		print('''The librarian stops dead in her tracks.\n[Head Librarian]: "You... what?"\n''')
+		enter = input("Now, you and Haruna exchange glances.\n")
+		enter = input('''[Head Librarian]: "How could you-" She sputters.\n[Head Librarian]: "You killed the- I just- Detention for the both of you!"\n''')
+		if friendship > 5:
+			enter = input(f"\tFriendship Level: [{friendship}]")
+			print(f'''She bursts into laughter.\n[Haruna]: "Well, if I'm in detention, I'd want it to be with you, {name}."''')
+			enter = input("\n------\n")
+			print("Congrats! You found the missing book AND you made a new friend today!\n")
+			print("Sucks that you got detention, but you also got to go into combat with a magical plant,\nso- it was a successful day nonetheless.")
+			print("\n\t\t\t---------------END---------------\n")
+			exit()
+		else:
+			enter = input(f"Friendship Level: [{friendship}]\n")
+			print(f'''She smiles.\n[Haruna]: "Destorying school property then getting detention together,"\n[Haruna]: "I guess we have a chance of being close someday."''')
+			enter = input("\n------\n")
+			print("Congrats! You found the missing book! And although your first impression with Haruna wasn't great,\nmaybe you can try to be nicer later on.\n")
+			print("Sucks that you got detention, but you also got to go into combat with a magical plant,\nso- it was a successful day nonetheless.")
+			print("\n\t\t\t---------------END---------------\n")
+			exit()
+
+
 	elif "colored pencil" not in inventory:
 		print('''[Haruna]: "That colored pencil looks miiiighty interesting..."''')
 		choice()
